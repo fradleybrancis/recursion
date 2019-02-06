@@ -8,38 +8,42 @@
 var getElementsByClassName = function(className
 ) {
 
-  let classy = [];
+  let school = [];
+  
+  var checknode = function(nodes) {
+    var kids = nodes.childNodes
+    for (var i in kids) {
+      var currentNode = kids[i];
+      var nextKids = kids[i].childNodes;
+      var currentClass = kids[i].classList;
 
-  var checkNodes = function(nodes) {
-
-    var kids = nodes.children;
-    
-    forEach(kids, function(element){
-      
-      if (element.classList === true && element.classList.contains(className)) {
-        classy.push(element);
+      if (currentClass && currentClass.contains(className)) {
+        school.push(currentNode);
+      }
+      if (nextKids !== undefined) {
+        checknode(currentNode);
       };
-      
-      if (element.children) {
-        checkNodes(element.children);
-      };
-    });
+    }
   };
 
-  checkNodes(document.body);
+  checknode(document);
 
-  return classy;
+  // if (document.body.classList === className) {
+  //   school.push(document.body)
+  // }
+
+  return school;
 
 };
 
-var forEach = function(collection, iterator) {
-  if (Array.isArray(collection)) {
-    for(var i = 0; i < collection.length; i++) {
-      iterator(collection[i], i, collection);
-    };
-  } else {
-    for(var i in collection) {
-      iterator(collection[i], i, collection);
-    };
-  };
-};
+// var currentSchedule = kids[i].classList || [];
+
+// var nextCollection = kids[i].childre
+// for (var currentClass in currentSchedule) {
+//   if (currentSchedule[currentClass] === className) {
+//     school.push(kids[i]);
+//   }
+// }
+// if (nextCollection) {
+//   checkelement(nextCollection);
+// }
